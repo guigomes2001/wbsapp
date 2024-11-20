@@ -1,0 +1,240 @@
+@charset "UTF-8";
+
+/* Reset básico */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/* Variáveis CSS */
+:root {
+    --cor-primaria: #007bff;
+    --cor-secundaria: #0056b3;
+    --cor-destaque: #253149;
+    --cor-fundo: #f0f0f0;
+    --cor-texto: #333;
+    --cor-erro: #e74c3c;
+    --raio-borda: 6px;
+    --cor-sucesso: #2ecc71;
+}
+
+/* Estilos do body */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: var(--cor-fundo);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start; 
+    min-height: 100vh;
+    padding: 20px;
+}
+
+/* Estilos para o cabeçalho */
+header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+h1 {
+    font-size: 2.5rem;
+    color: var(--cor-texto);
+    text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2);
+}
+
+.subtitulo {
+    font-size: 1.2rem;
+    color: var(--cor-texto);
+    margin-top: 1rem;
+}
+
+/* Estilos para a seção de agendamento */
+.agendamento {
+    width: 90%;
+    max-width: 700px;
+    background-color: #ffffff;
+    border-radius: var(--raio-borda);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+    padding: 30px;
+    margin: 0 auto; /* Centraliza o formulário */
+}
+
+/* Estilos para os campos de entrada */
+.input-container {
+    position: relative;
+    margin-bottom: 25px; /* Aumenta a margem entre os campos */
+}
+
+.input-container label {
+    display: block;
+    margin-bottom: 5px; /* Adiciona um espaço entre o label e o input */
+    font-weight: bold;
+}
+
+.input-container input,
+.input-container textarea {
+    width: 100%;
+    padding: 12px 15px; /* Ajusta o padding interno dos campos */
+    border: 2px solid #bdc3c7;
+    border-radius: var(--raio-borda);
+    font-size: 16px;
+    transition: border 0.3s, box-shadow 0.3s;
+}
+
+.input-container input:focus,
+.input-container textarea:focus {
+    border-color: var(--cor-primaria);
+    outline: none;
+    box-shadow: 0 0 10px rgba(41, 128, 185, 0.5);
+}
+
+/* Estilos para botões */
+.botao-container {
+    display: flex;
+    justify-content: center; /* Centraliza os botões horizontalmente */
+    gap: 10px; /* Espaço entre os botões */
+    margin-top: 20px; /* Espaço acima dos botões */
+}
+
+button {
+    padding: 12px 25px; /* Ajusta o padding dos botões para maior uniformidade */
+    border: none;
+    border-radius: var(--raio-borda);
+    color: #fff;
+    font-size: 16px; /* Ajusta o tamanho da fonte para os botões */
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    flex: 1; /* Faz com que os botões ocupem o mesmo espaço */
+    max-width: 200px; /* Define um tamanho máximo para os botões */
+}
+
+#botaoVoltar {
+    background-color: var(--cor-erro);
+}
+
+#botaoVoltar:hover {
+    background-color: #c0392b;
+    transform: translateY(-3px);
+}
+
+#botaoVoltar:focus {
+    outline: 2px solid var(--cor-erro);
+    outline-offset: 2px;
+}
+
+#botaoAgendar {
+    background: linear-gradient(to right, var(--cor-secundaria), var(--cor-primaria));
+}
+
+#botaoAgendar:hover {
+    background: linear-gradient(to right, var(--cor-primaria), var(--cor-secundaria));
+    transform: translateY(-3px);
+}
+
+#botaoAgendar:focus {
+    outline: 2px solid var(--cor-secundaria);
+    outline-offset: 2px;
+}
+
+
+/* Estilos para mensagens de erro */
+.error-message {
+    color: var(--cor-erro);
+    font-size: 14px;
+    margin: 5px 0; /* Ajusta a margem superior e inferior */
+}
+
+/* Estilos para as instruções */
+.instrucoes {
+    font-size: 16px;
+    color: var(--cor-texto);
+    margin-top: 30px; /* Aumenta a margem superior */
+    margin-bottom: 20px;
+    text-align: center; 
+    line-height: 1.5;
+    background-color: #ecf0f1;
+    padding: 15px;
+    border-radius: var(--raio-borda);
+}
+
+/* Estilos para o footer */
+footer {
+    text-align: center;
+    background-color: var(--cor-destaque);
+    color: white;
+    padding: 20px;
+    border-radius: var(--raio-borda);
+    margin-top: 30px; /* Ajusta a margem superior */
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.2);
+    animation: pulse 1.5s infinite;
+}
+
+footer p {
+    margin: 5px 0;
+}
+
+/* Animações */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes pulse {
+    0%, 100% {
+        box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.2), 0 0 20px var(--cor-destaque);
+    }
+    50% {
+        box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.2), 0 0 40px var(--cor-destaque);
+    }
+}
+
+/* Estilos responsivos */
+@media (max-width: 768px) {
+    .agendamento {
+        padding: 20px;
+    }
+
+    .input-container input,
+    .input-container textarea {
+        padding: 12px 16px;
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 480px) {
+    h1 {
+        font-size: 2rem;
+    }
+
+    .subtitulo {
+        font-size: 1rem;
+    }
+
+    .agendamento {
+        border-radius: 0;
+        box-shadow: none;
+    }
+
+    .instrucoes {
+        font-size: 14px;
+    }
+
+    footer {
+        border-radius: 0;
+    }
+
+    /* Ajustes específicos para entradas de data e hora */
+    .input-container input[type="date"],
+    .input-container input[type="time"] {
+        padding: 12px;
+        font-size: 14px;
+    }
+}

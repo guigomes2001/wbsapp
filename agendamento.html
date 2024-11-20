@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agendamento</title>
+    <link rel="stylesheet" href="agendamento.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <header>
+        <h1><i class="fas fa-calendar-check"></i> Agendamento de Serviços</h1>
+        <p class="subtitulo"><i class="fas fa-pencil-alt"></i> Preencha o formulário abaixo para agendar um horário.</p>
+    </header>
+
+    <main>
+        <div class="agendamento">
+            <form id="formAgendamento" action="/wbs/agendar" method="post">
+                
+                <div class="input-container">
+                    <label for="nome"><i class="fas fa-user"></i> Nome</label> 
+                    <input type="text" id="nome" name="nome" placeholder="Informe seu nome" required>
+                    <div class="error-message" id="errorNome"></div>
+                </div>
+
+                <div class="input-container">
+                    <label for="telefone"><i class="fas fa-phone-alt"></i> Telefone/WhatsApp</label> 
+                    <input type="tel" id="telefone" name="telefone" placeholder="Informe seu WhatsApp/Telefone" required pattern="[0-9]{10,15}">
+                    <div class="error-message" id="errorTelefone"></div>
+                </div>
+
+                <div class="input-container">
+                    <label for="data"><i class="fas fa-calendar-alt"></i> Data</label>
+                    <input type="date" id="data" name="data" required>
+                    <div class="error-message" id="errorData"></div>
+                </div>
+
+                <div class="input-container">
+                    <label for="hora"><i class="fas fa-clock"></i> Hora</label> 
+                    <input type="time" id="hora" name="hora" required>
+                    <div class="error-message" id="errorHora"></div>
+                </div>
+
+                <div class="input-container">
+                    <label for="observacoes"><i class="fas fa-comments"></i> Observações</label> 
+                    <textarea id="observacoes" name="observacoes" rows="4" placeholder="Observações"></textarea>
+                </div>
+
+                <div class="botao-container">
+                    <button type="submit" id="botaoAgendar"><i class="fas fa-calendar-plus"></i> Agendar</button>
+                    <button type="button" id="botaoVoltar" onclick="window.location.href='index.html'"><i class="fas fa-arrow-left"></i> Voltar para o início</button>
+                </div>
+            </form>
+
+            <div class="instrucoes">
+                <p><i class="fas fa-info-circle"></i> Por favor, verifique se todas as informações estão corretas antes de enviar o agendamento.</p>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div>
+            <p id="data-hora"></p> <!-- Aqui será inserida a data e hora em tempo real -->
+            <p>&copy; 2024 wbs.com. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <script src="agendamento.js"></script>
+</body>
+</html>

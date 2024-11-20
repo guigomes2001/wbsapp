@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description"
+	content="Solução de agendamento de serviços em barbearias de forma online">
+<title>WBS - Agendamento de Barbearia</title>
+<link rel="icon" href="imagens/favicon.png" type="image/webp">
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet"
+	href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap">
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+	<header>
+		<h1>
+			<i class="fas fa-cut" aria-hidden="true"></i> Bem-vindo ao WBS -
+			Agendamento de Barbearia Web
+		</h1>
+		<p class="subtitulo">
+			<i class="fas fa-map-marker-alt" aria-hidden="true"></i> Selecione
+			sua região abaixo (Somente Distrito Federal-DF no momento)
+		</p>
+	</header>
+
+	<main>
+		<div class="checkboxes">
+			<div class="checkbox-item">
+				<input type="checkbox" id="regiao1" name="regiao" value="1"
+					aria-label="Estrutural" role="checkbox" aria-checked="false">
+				<label for="regiao1" aria-labelledby="regiao1"><i
+					class="fas fa-map-marker-alt" aria-hidden="true"></i> Estrutural</label>
+			</div>
+			<div class="checkbox-item">
+				<input type="checkbox" id="regiao2" name="regiao" value="2"
+					aria-label="São Sebastião" role="checkbox" aria-checked="false">
+				<label for="regiao2" aria-labelledby="regiao2"><i
+					class="fas fa-map-marker-alt" aria-hidden="true"></i> São Sebastião</label>
+			</div>
+			<div class="checkbox-item">
+				<input type="checkbox" id="regiao3" name="regiao" value="3"
+					aria-label="Riacho Fundo" role="checkbox" aria-checked="false">
+				<label for="regiao3" aria-labelledby="regiao3"><i
+					class="fas fa-map-marker-alt" aria-hidden="true"></i> Riacho Fundo</label>
+			</div>
+			<div class="checkbox-item">
+				<input type="checkbox" id="regiao4" name="regiao" value="4"
+					aria-label="Sudoeste" role="checkbox" aria-checked="false">
+				<label for="regiao4" aria-labelledby="regiao4"><i
+					class="fas fa-map-marker-alt" aria-hidden="true"></i> Sudoeste</label>
+			</div>
+			<div class="checkbox-item">
+				<input type="checkbox" id="regiao5" name="regiao" value="5"
+					aria-label="Guará" role="checkbox" aria-checked="false"> <label
+					for="regiao5" aria-labelledby="regiao5"><i
+					class="fas fa-map-marker-alt" aria-hidden="true"></i> Guará</label>
+			</div>
+		</div>
+
+		<div class="button-container">
+			<button id="botaoPesquisa" aria-label="Pesquisar">
+				<i class="fas fa-search" aria-hidden="true"></i> Pesquisar
+			</button>
+			<button id="botaoAdicionarBarbearia"
+				onclick="window.location.href='incluirBarbearia.html'"
+				aria-label="Sugerir Barbearia">
+				<i class="fas fa-plus" aria-hidden="true"></i> Sugerir Barbearia
+			</button>
+		</div>
+
+		<!-- Estrutura para mostrar os dados da barbearia -->
+		<div id="dadosBarbearia" class="dados-barbearia"
+			style="display: none;">
+			<h2>
+				<i class="fas fa-barber" aria-hidden="true"></i> Informações da
+				Barbearia
+			</h2>
+		</div>
+
+		<!-- Botão para redirecionar para a página de faturamento
+		<div class="hint-container">
+			<button id="botaoFaturamento" aria-label="Faturamento">Estatísticas</button>
+			<div class="hint-icon" tabindex="0" aria-label="Dica">
+				<div class="hint" role="tooltip">Exclusivo para barbearias.
+					Para mais informações sobre este módulo, por gentileza nos contatar
+					via e-mail</div>
+			</div>
+		</div> -->
+
+	</main>
+
+	<!-- Modal de Login -->
+	<div id="loginModal" class="modal" style="display: none;">
+		<div class="modal-content">
+			<span class="close">&times;</span>
+			<h2>Login</h2>
+			<form id="loginForm" action="/wbs/api/verificarLogin" method="post">
+				<label for="username">Usuário:</label> <input type="text"
+					id="username" name="username" required> <label for="senha">Senha:</label>
+				<input type="password" id="senha" name="senha" required>
+				<button type="submit">Entrar</button>
+			</form>
+		</div>
+	</div>
+
+	<!-- Rodapé -->
+	<footer>
+		<p id="data-hora"></p>
+		<!-- Aqui será inserida a data e hora em tempo real -->
+		<p>&copy; 2024 wbs.com. Todos os direitos reservados.</p>
+	</footer>
+
+	<script src="javascript.js"></script>
+</body>
+</html>

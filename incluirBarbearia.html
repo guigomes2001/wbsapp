@@ -1,0 +1,86 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Incluir Barbearia</title>
+    <link rel="stylesheet" href="inclusaoBarb.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <header>
+        <h1><i class="fas fa-store"></i> Sugestão para Inclusão de Barbearia</h1>
+        <p class="subtitulo"><i class="fas fa-hand-holding-heart"></i> Ajude-nos a expandir nosso catálogo sugerindo uma barbearia.</p>
+    </header>
+
+    <main>
+        <div class="sugestao">
+            <form id="formSugestao" action="/wbs/sugerir" method="post">
+                <input type="hidden" name="action" value="insert">
+
+                <div class="input-container">
+                    <label for="nome"><i class="fas fa-user"></i> Nome</label> 
+                    <input type="text" id="nome" name="nome" placeholder="Informe seu nome" required>
+                    <div class="error-message" id="errorNome"></div>
+                </div>
+                
+                <div class="input-container">
+                    <label for="nomeBarbearia"><i class="fas fa-store"></i> Nome da Barbearia</label>
+                    <input type="text" id="nomeBarbearia" name="nomeBarbearia" placeholder="Informe o nome da barbearia" required>
+                    <div class="error-message" id="errorNomeBarbearia"></div>
+                </div>
+
+                <div class="input-container">
+                    <label for="endereco"><i class="fas fa-map-marker-alt"></i> Endereço da Barbearia</label>
+                    <input type="text" id="endereco" name="endereco" placeholder="Informe o endereço completo" required>
+                    <div class="error-message" id="errorEndereco"></div>
+                </div>
+
+                <div class="input-container">
+                    <label for="telefone"><i class="fas fa-phone-alt"></i> Telefone de Contato da Barbearia</label>
+                    <input type="tel" id="telefone" name="telefone" placeholder="Informe o telefone da barbearia" required pattern="[0-9]{10,15}">
+                    <div class="error-message" id="errorTelefone"></div>
+                </div>
+
+                <div class="input-container">
+                    <label for="whatsapp"><i class="fab fa-whatsapp"></i> WhatsApp da Barbearia</label>
+                    <input type="tel" id="whatsapp" name="whatsapp" placeholder="Informe o WhatsApp da barbearia" pattern="[0-9]{10,15}">
+                </div>
+
+                <div class="input-container">
+                    <label for="regiao"><i class="fas fa-map"></i> Região</label>
+                    <select id="regiao" name="regiao" required>
+                        <option value="">Selecione uma região</option>
+                        <option value="estrutural">Estrutural - DF</option>
+                        <option value="saoSebastiao">São Sebastião - DF</option>
+                        <option value="riachoFundo">Riacho Fundo - DF</option>
+                        <option value="sudoeste">Sudoeste - DF</option>
+                        <option value="guara">Guará - DF</option>
+                    </select>
+                </div>
+                
+                <div class="input-container">
+                    <label for="observacoes"><i class="fas fa-comments"></i> Observações</label> 
+                    <textarea id="observacoes" name="observacoes" rows="4" placeholder="Descreva se você é proprietário/cliente e demais observações para sugestão" required></textarea>
+                </div>
+                
+                <div class="botao-container">
+                    <button type="submit" id="botaoSugestao"><i class="fas fa-paper-plane"></i> Enviar sugestão</button>
+                    <button type="button" id="botaoVoltar" onclick="window.location.href='index.html'"><i class="fas fa-arrow-left"></i> Voltar para o início</button>
+                </div>
+            </form>
+        </div>
+    </main>
+
+     <!-- Rodapé -->
+    <footer>
+        <p id="data-hora"></p> 
+        <p>&copy; 2024 wbs.com. Todos os direitos reservados.</p>
+    </footer>
+
+    <script src="sugestao.js"></script>
+    <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+
+</body>
+</html>

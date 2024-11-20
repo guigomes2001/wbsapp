@@ -1,0 +1,504 @@
+@charset "UTF-8";
+
+/* Reset básico */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/* Variáveis CSS */
+:root {
+    --cor-primaria: #007bff;
+    --cor-secundaria: #0056b3;
+    --cor-destaque: #253149;
+    --cor-fundo: #f0f0f0;
+    --cor-texto: #333;
+    --cor-branco: #ffffff;
+    --raio-borda: 12px;
+    --sombra-primaria: rgba(0, 0, 0, 0.2);
+    --sombra-secundaria: rgba(0, 0, 0, 0.3);
+}
+
+/* Configuração geral do body */
+body {
+    font-family: 'Roboto', Arial, sans-serif;
+    background-color: var(--cor-fundo);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 100vh;
+    padding: 20px;
+    color: var(--cor-texto);
+}
+
+/* Estilos para o header */
+header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+/* Estilos para o conteúdo principal */
+main {
+    text-align: center;
+    width: 100%;
+    max-width: 800px;
+    flex: 1;
+}
+
+/* Estilos para títulos */
+h1, h4 {
+    color: var(--cor-texto);
+}
+
+h1 {
+    font-size: 2.5rem;
+    text-shadow: 1px 1px 5px var(--sombra-primaria);
+    margin-bottom: 1rem;
+    transition: color 0.3s ease;
+}
+
+h1:hover {
+    color: var(--cor-secundaria);
+}
+
+h4 {
+    margin-bottom: 1rem;
+    font-weight: 400;
+}
+
+/* Estilos para a seção de checkboxes */
+.checkboxes {
+    display: flex;
+    flex-wrap: wrap; /* Permite que os itens se movam para a linha seguinte se não houver espaço suficiente */
+    justify-content: center; /* Centraliza os itens horizontalmente */
+    gap: 1rem; /* Espaçamento entre os checkboxes */
+}
+
+/* Estilos para cada item de checkbox */
+.checkbox-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: var(--cor-branco);
+    border-radius: var(--raio-borda);
+    box-shadow: 0 4px 8px var(--sombra-primaria);
+    padding: 0.75rem 1rem;
+    transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
+    width: 100%; /* Faz com que o item use toda a largura disponível */
+    max-width: 250px; /* Define uma largura máxima para cada item */
+    box-sizing: border-box; /* Inclui padding e borda na largura total do elemento */
+}
+
+/* Estilos para o input checkbox */
+.checkboxes input[type="checkbox"] {
+    width: 1.5rem;
+    height: 1.5rem;
+    accent-color: var(--cor-primaria);
+    cursor: pointer;
+    margin: 0;
+    transition: transform 0.2s, background-color 0.2s;
+}
+
+/* Estilos para o label do checkbox */
+.checkboxes label {
+    font-size: 1rem;
+    color: var(--cor-texto);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    transition: color 0.3s, transform 0.2s;
+}
+
+/* Efeito de hover no label */
+.checkboxes label:hover {
+    color: var(--cor-primaria);
+    transform: scale(1.02);
+}
+
+/* Estilos para o ícone dentro do label */
+.checkboxes i {
+    font-size: 1.25rem;
+    color: var(--cor-secundaria);
+    transition: color 0.3s;
+}
+
+/* Estilo para o checkbox-item ativo */
+.checkboxes input[type="checkbox"]:checked + label i {
+    color: var(--cor-primaria);
+}
+
+/* Responsividade para telas pequenas */
+@media (max-width: 768px) {
+    .checkbox-item {
+        flex: 1 1 calc(50% - 1rem); /* Em telas pequenas, cada item ocupa 50% da largura do contêiner menos o espaçamento */
+        max-width: none; /* Remove a largura máxima para permitir que os itens ocupem toda a largura disponível */
+    }
+}
+
+@media (max-width: 480px) {
+    .checkbox-item {
+        flex: 1 1 100%; /* Em telas muito pequenas, cada item ocupa 100% da largura do contêiner */
+        max-width: none; /* Remove a largura máxima para permitir que os itens ocupem toda a largura disponível */
+    }
+}
+
+
+/* Estilos para os botões */
+.button-container {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+button {
+    padding: 0.75rem 1.25rem;
+    border: none;
+    border-radius: var(--raio-borda);
+    background-color: var(--cor-primaria);
+    color: var(--cor-branco);
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: bold;
+    box-shadow: 0 4px 15px var(--sombra-primaria);
+    transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
+}
+
+button:hover {
+    background-color: var(--cor-secundaria);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px var(--sombra-secundaria);
+}
+
+button:focus {
+    outline: 2px solid var(--cor-secundaria);
+    outline-offset: 2px;
+}
+
+/* Estilos para o botão de faturamento com tom verde claro */
+#botaoFaturamento {
+    padding: 0.75rem 1.5rem; /* Padding aumentado para um botão mais robusto */
+    border: none;
+    border-radius: var(--raio-borda);
+    background-color: #4caf50; /* Cor de fundo verde claro */
+    color: var(--cor-branco);
+    cursor: pointer;
+    font-size: 1.125rem; /* Tamanho de fonte maior para mais destaque */
+    font-weight: bold;
+    box-shadow: 0 4px 8px var(--sombra-secundaria); /* Sombra melhorada */
+    transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
+    margin: 1rem 0;
+    display: inline-block;
+}
+
+#botaoFaturamento:hover {
+    background-color: #388e3c; /* Cor de fundo verde mais escuro ao passar o mouse */
+    color: var(--cor-branco);
+    transform: translateY(-2px); /* Levanta o botão ao passar o mouse */
+    box-shadow: 0 6px 12px var(--sombra-secundaria); /* Sombra mais intensa ao passar o mouse */
+}
+
+#botaoFaturamento:focus {
+    outline: 2px solid var(--cor-primaria);
+    outline-offset: 2px;
+}
+
+/* Estilos para o hint de faturamento */
+.hint-container {
+    display: inline-flex;
+    align-items: center;
+    margin-top: 1rem; 
+}
+
+.hint-icon {
+    width: 30px; 
+    height: 30px; 
+    background-color: #28a745; 
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 8px; 
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.hint-icon:hover {
+    transform: scale(1.1); /* Efeito de aumento ao passar o mouse */
+}
+
+.hint {
+    display: none;
+    position: absolute;
+    top: calc(100% + -170px); /* Ajusta a posição do hint para ficar abaixo do ícone */
+    left: -50%; 
+    transform: translateX(-50%) translateY(-10px);
+    background-color: #ffffff; 
+    border: 2px solid #28a745; 
+    border-radius: 8px;
+    padding: 1rem;
+    z-index: 10;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    white-space: normal; 
+    font-size: 0.9rem; 
+    max-width: 90vw; /* Aumenta a largura máxima para dispositivos móveis */
+    transition: opacity 0.3s, transform 0.3s; 
+    opacity: 0; /* Começa invisível */
+}
+
+.hint-icon:hover .hint,
+.hint-icon:focus .hint {
+    display: block;
+    opacity: 1; 
+    animation: slideDown 0.3s forwards; /* Animação para aparecer */
+    transform: translate(-50%, 0); /* Retorna à posição original */
+}
+
+@keyframes slideDown {
+    from {
+        transform: translate(-50%, -10px);
+        opacity: 0;
+    }
+    to {
+        transform: translate(-50%, 0);
+        opacity: 1;
+    }
+}
+
+.hint::after {
+    content: '';
+    position: absolute;
+    top: 100%; /* Coloca o triângulo abaixo do hint */
+    left: 63%;
+    transform: translateX(-50%);
+    border-width: 5px;
+    border-style: solid;
+    border-color: #28a745 transparent transparent transparent; /* Triângulo verde */
+}
+
+
+/* Aplicar animação de fade-in aos elementos .barbearia */
+.barbearia {
+    padding: 1.25rem;
+    background: linear-gradient(145deg, var(--cor-branco), var(--cor-fundo));
+    border-radius: var(--raio-borda);
+    box-shadow: 0 10px 20px var(--sombra-primaria), inset 0 2px 5px rgba(255, 255, 255, 0.5);
+    margin-bottom: 1.5rem;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+/* Estilos para cada faixa de região */
+.faixa-regiao {
+    margin-top: 1.5rem;
+    margin-bottom: 1rem;
+    padding: 1rem;
+    border-radius: var(--raio-borda);
+    background-color: var(--cor-branco);
+    box-shadow: 0 4px 20px var(--sombra-primaria);
+    transition: transform 0.2s ease;
+}
+
+.faixa-regiao:hover {
+    transform: scale(1.02); /* Efeito de escala ao passar o mouse */
+}
+
+/* Estilos para o título da faixa de região */
+.faixa-regiao h2 {
+    background-color: var(--cor-primaria);
+    color: var(--cor-branco);
+    padding: 0.625rem;
+    border-radius: var(--raio-borda) var(--raio-borda) 0 0;
+    margin-bottom: 1rem;
+    text-align: center;
+    box-shadow: 0 2px 5px var(--sombra-primaria);
+}
+
+/* Estilos para a estrutura de dados da barbearia dentro de faixa-regiao */
+#dadosBarbearia {
+    width: 100%;
+    max-width: 1000px;
+}
+
+/* Estilos para cada barbearia dentro de faixa-regiao */
+.barbearia {
+    padding: 1.25rem;
+    background: linear-gradient(145deg, var(--cor-branco), var(--cor-fundo));
+    border-radius: var(--raio-borda);
+    box-shadow: 0 10px 20px var(--sombra-primaria), inset 0 2px 5px rgba(255, 255, 255, 0.5);
+    margin-bottom: 1.5rem;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.barbearia:hover {
+    transform: scale(1.03);
+    box-shadow: 0 4px 15px var(--sombra-secundaria);
+}
+
+.barbearia p {
+    margin-bottom: 0.625rem;
+    color: var(--cor-texto);
+}
+
+/* Estilos para o botão de agendamento */
+.barbearia button {
+    display: inline-block;
+    margin-top: 0.625rem;
+    padding: 0.75rem 1.25rem;
+    border: none;
+    border-radius: var(--raio-borda);
+    background: linear-gradient(145deg, var(--cor-primaria), var(--cor-secundaria));
+    color: var(--cor-branco);
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 15px var(--sombra-primaria);
+    position: relative;
+    overflow: hidden;
+}
+
+.barbearia button:hover {
+    background: linear-gradient(145deg, var(--cor-secundaria), var(--cor-primaria));
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px var(--sombra-secundaria);
+}
+
+.barbearia button:focus {
+    outline: 2px solid var(--cor-secundaria);
+    outline-offset: 2px;
+}
+
+.barbearia button:active {
+    transform: translateY(1px);
+    box-shadow: 0 2px 10px var(--sombra-secundaria);
+}
+
+.barbearia button::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 300%;
+    height: 300%;
+    background: rgba(255, 255, 255, 0.15);
+    transition: all 0.3s ease;
+    transform: translate(-50%, -50%) scale(0);
+    border-radius: 50%;
+}
+
+.barbearia button:hover::before {
+    transform: translate(-50%, -50%) scale(1);
+}
+
+/*Mensagem "Não há barbearias na região"*/
+.mensagem-erro {
+    margin-top: 2rem; 
+    margin-bottom: 1.5rem; 
+    padding: 0.75rem; 
+    color: #d9534f; 
+    background-color: #f2dede; 
+    border: 1px solid #d9534f; 
+    border-radius: var(--raio-borda); 
+    font-weight: bold;
+}
+
+/* Estilos para o modal */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    background-color: var(--cor-branco);
+    padding: 2rem;
+    border-radius: var(--raio-borda);
+    box-shadow: 0 4px 10px var(--sombra-primaria);
+    width: 300px;
+    position: relative;
+}
+
+.modal .close {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+.modal form {
+    display: flex;
+    flex-direction: column;
+}
+
+.modal form label {
+    margin-bottom: 0.5rem;
+}
+
+.modal form input {
+    margin-bottom: 1rem;
+    padding: 0.5rem;
+    border: 1px solid var(--cor-texto);
+    border-radius: var(--raio-borda);
+}
+
+.modal form button {
+    padding: 0.75rem;
+    border: none;
+    border-radius: var(--raio-borda);
+    background-color: var(--cor-primaria);
+    color: var(--cor-branco);
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+.modal form button:hover {
+    background-color: var(--cor-secundaria);
+}
+
+/* Estilos para o footer */
+footer {
+    text-align: center;
+    background-color: var(--cor-destaque);
+    color: var(--cor-branco);
+    padding: 1.25rem;
+    border-radius: var(--raio-borda);
+    margin-top: 1.5rem;
+    box-shadow: 0 -2px 10px var(--sombra-primaria);
+    animation: pulse 1.5s infinite;
+}
+
+footer p {
+    margin: 0.3125rem 0;
+}
+
+/* Animações */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes pulse {
+    0%, 100% {
+        box-shadow: 0 -4px 10px var(--sombra-primaria), 0 0 20px var(--cor-destaque);
+    }
+    50% {
+        box-shadow: 0 -4px 10px var(--sombra-primaria), 0 0 40px var(--cor-destaque);
+    }
+}
