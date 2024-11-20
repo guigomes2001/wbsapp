@@ -51,17 +51,7 @@ document.getElementById('formAgendamento').addEventListener('submit', function(e
     }
 
     if (valido) {
-        // Enviar o formulário via AJAX
-        fetch('/wbs/agendar', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded',
-            },
-            body: new URLSearchParams(new FormData(document.getElementById('formAgendamento')))
-        })
-        .then(response => response.text()) // Recebe a resposta como texto
-        .then(result => {
-            if (result.trim() === 'Sucesso') { // Verifica o texto da resposta
+        
                 const mensagem = `Olá, meu nome é ${nome}. Gostaria de agendar um serviço na ${barbeariaNome} para o dia ${data} às ${hora}. Meu WhatsApp/Telefone é ${telefone}. Observações: ${observacoes}`;
                 const whatsappUrl = `https://wa.me/${barbeariaWhatsapp}?text=${encodeURIComponent(mensagem)}`;
                 window.open(whatsappUrl, '_blank');
@@ -76,5 +66,3 @@ document.getElementById('formAgendamento').addEventListener('submit', function(e
             console.error('Erro:', error);
             alert('Ocorreu um erro ao enviar o agendamento. Tente novamente');
         });
-    }
-});

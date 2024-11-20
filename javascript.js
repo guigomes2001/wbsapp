@@ -29,16 +29,16 @@ $(document).ready(function () {
 
         const regioes = {
             '1': { titulo: 'Estrutural - DF', barbearias: [
-                { nome: 'Barbearia 2 Irmão', endereco: 'Av. Principal, nº 123, Bloco A, Brasília - DF', telefone: '(61) 1234-5678', whatsapp: '61986532028' },
-                { nome: 'Barbearia Corte Duplo', endereco: 'Rua dos Cajueiros, nº 321, Bloco B, Brasília - DF', telefone: '(61) 1234-4321', whatsapp: '1133333333' }
+                { nome: 'Barbearia 2 Irmão', endereco: 'Av. *********', telefone: '(61) ********', whatsapp: '(61)986532028' },
+                { nome: 'Barbearia Corte Duplo', endereco: 'Rua ********* DF', telefone: '(61) *********', whatsapp: '(61)11111111' }
             ]},
             '2': { titulo: 'São Sebastião - DF', barbearias: [
-                { nome: 'Barbearia Novo Visual', endereco: 'Rua das Palmeiras, nº 456, São Sebastião - DF', telefone: '(61) 9876-5432', whatsapp: '1144444444' },
-                { nome: 'Salão 8 Pontos', endereco: 'Av. Changrilá, nº 777, Edifício ABC - Térreo, Brasília - DF', telefone: '(61) 7777-7777', whatsapp: '1155555555' }
+                { nome: 'Barbearia Novo Visual', endereco: 'Rua ***********, São Sebastião - DF', telefone: '(61)*********', whatsapp: '(61)11111111' },
+                { nome: 'Salão 8 Pontos', endereco: 'Av *********** Brasília - DF', telefone: '(61)*********', whatsapp: '(61)11111111' }
             ]},
             '3': { titulo: 'Riacho Fundo - DF', barbearias: [
-                { nome: 'Barbearia Navalha Afiada', endereco: 'Quadra 2, Conjunto 3, Lote 4, Riacho Fundo - DF', telefone: '(61) 5555-4444', whatsapp: '6199999999' },
-                { nome: 'Salão Pente e Régua', endereco: 'Av. 2 Pinheiros, conjunto 1, Riacho Fundo', telefone: '(61) 5555-5555', whatsapp: '6166666666' }
+                { nome: 'Barbearia Navalha Afiada', endereco: 'Quadra *********** - DF', telefone: '(61)*********', whatsapp: '(61)11111111' },
+                { nome: 'Salão Pente e Régua', endereco: 'Av. *********', telefone: '(61)*********', whatsapp: '(61)11111111' }
             ]}
         };
 

@@ -7,6 +7,17 @@ document.addEventListener("DOMContentLoaded", function () {
     form.addEventListener("submit", function (event) {
         event.preventDefault(); // Evita o envio padrão do formulário
 
+         // Exibe o loading e desabilita o botão
+    const botao = document.getElementById("botaoSugestao");
+    botao.disabled = true;
+    botao.textContent = "Aguarde...";
+
+    // Simula o tempo de bloqueio (ex: 10 segundos)
+    setTimeout(() => {
+        botao.disabled = false;
+        botao.textContent = "Enviar sugestão";
+    }, 300000); // 5 minutos
+
         // Obter valores dos campos
         const nome = document.getElementById("nome").value;
         const nomeBarbearia = document.getElementById("nomeBarbearia").value;
@@ -27,6 +38,8 @@ document.addEventListener("DOMContentLoaded", function () {
             regiao: regiao,
         };
 
+        console.log(params);
+
         // Enviar e-mail via EmailJS
         emailjs.send("service_5btsf5e", "template_lmpapki", params)
             .then(function (response) {
@@ -36,6 +49,11 @@ document.addEventListener("DOMContentLoaded", function () {
             .catch(function (error) {
                 alert("Ocorreu um erro ao enviar sua sugestão. Tente novamente.");
                 console.error("Erro:", error);
+            }) 
+
+            .finally(function () {
+                // Oculta o loading após o envio
+                loadingElement.style.display = "none";
             });
             
         // Limpa mensagens de erro
