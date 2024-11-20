@@ -74,36 +74,6 @@ document.addEventListener("DOMContentLoaded", function () {
         if (!valido) {
             return; // Se algum campo for inválido, não envia o formulário
         }
-
-        // Enviar dados via AJAX
-        fetch('/wbs/sugerir', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded',
-            },
-            body: new URLSearchParams({
-                nome: nome,
-                nomeBarbearia: nomeBarbearia,
-                endereco: endereco,
-                telefone: telefone,
-                whatsapp: whatsapp,
-                observacoes: observacoes,
-                regiao: regiao
-            })
-        })
-            .then(response => response.json())
-            .then(data => {
-                if (data.status === 'success') {
-                    alert(data.message);
-                    form.reset(); // Limpar o formulário após o envio
-                } else {
-                    alert(data.message);
-                }
-            })
-            .catch(error => {
-                console.error('Erro:', error);
-                alert('Ocorreu um erro. Por favor, tente novamente.');
-            });
     });
 
     // Atualiza a data e hora em tempo real no rodapé
