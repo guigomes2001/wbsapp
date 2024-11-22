@@ -15,8 +15,13 @@
     --cor-fundo: #f0f0f0;
     --cor-texto: #333;
     --cor-erro: #e74c3c;
+    --cor-vermelho: #e74c3c;
+    --cor-vermelho-hover: #c0392b;
     --raio-borda: 6px;
     --cor-sucesso: #2ecc71;
+    --cor-branco: #ffffff;
+    --sombra-primaria: rgba(0, 0, 0, 0.1);
+
 }
 
 /* Estilos do body */
@@ -92,45 +97,50 @@ h1 {
 /* Estilos para botões */
 .botao-container {
     display: flex;
-    justify-content: center; /* Centraliza os botões horizontalmente */
-    gap: 10px; /* Espaço entre os botões */
-    margin-top: 20px; /* Espaço acima dos botões */
+    justify-content: center;
+    gap: 20px; /* Aumenta o espaço entre os botões */
 }
 
-button {
-    padding: 12px 25px; /* Ajusta o padding dos botões para maior uniformidade */
+.botao-container button {
+    padding: 12px 25px;
+    font-size: 1rem;
+    color: #ffffff;
     border: none;
     border-radius: var(--raio-borda);
-    color: #fff;
-    font-size: 16px; /* Ajusta o tamanho da fonte para os botões */
     cursor: pointer;
-    transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-    flex: 1; /* Faz com que os botões ocupem o mesmo espaço */
-    max-width: 200px; /* Define um tamanho máximo para os botões */
+    transition: background-color 0.3s ease, transform 0.2s;
+    text-align: center;
 }
 
+/* Botão "Voltar" com cor vermelha */
 #botaoVoltar {
-    background-color: var(--cor-erro);
+    background-color: var(--cor-vermelho);
 }
 
 #botaoVoltar:hover {
-    background-color: #c0392b;
-    transform: translateY(-3px);
+    background-color: var(--cor-vermelho-hover);
+    transform: scale(1.05); /* Efeito de crescimento no hover */
 }
 
-#botaoVoltar:focus {
-    outline: 2px solid var(--cor-erro);
-    outline-offset: 2px;
+/* Estilos para responsividade */
+@media (max-width: 768px) {
+    .botao-container {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .botao-container button {
+        width: 100%;
+    }
 }
 
 #botaoAgendar {
-    background: linear-gradient(to right, var(--cor-secundaria), var(--cor-primaria));
+    background-color: var(--cor-primaria);
 }
 
 #botaoAgendar:hover {
-    background: linear-gradient(to right, var(--cor-primaria), var(--cor-secundaria));
-    transform: translateY(-3px);
+    background-color: var(--cor-secundaria);
+    transform: scale(1.05); /* Efeito de crescimento no hover */
 }
 
 #botaoAgendar:focus {
@@ -163,28 +173,16 @@ button {
 footer {
     text-align: center;
     background-color: var(--cor-destaque);
-    color: white;
-    padding: 20px;
+    color: var(--cor-branco);
+    padding: 1.25rem;
     border-radius: var(--raio-borda);
-    margin-top: 30px; /* Ajusta a margem superior */
-    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.2);
+    margin-top: 1.5rem;
+    box-shadow: 0 -2px 10px var(--sombra-primaria);
     animation: pulse 1.5s infinite;
 }
 
 footer p {
-    margin: 5px 0;
-}
-
-/* Animações */
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(-20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+    margin: 0.3125rem 0;
 }
 
 @keyframes pulse {
@@ -193,48 +191,5 @@ footer p {
     }
     50% {
         box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.2), 0 0 40px var(--cor-destaque);
-    }
-}
-
-/* Estilos responsivos */
-@media (max-width: 768px) {
-    .agendamento {
-        padding: 20px;
-    }
-
-    .input-container input,
-    .input-container textarea {
-        padding: 12px 16px;
-        font-size: 14px;
-    }
-}
-
-@media (max-width: 480px) {
-    h1 {
-        font-size: 2rem;
-    }
-
-    .subtitulo {
-        font-size: 1rem;
-    }
-
-    .agendamento {
-        border-radius: 0;
-        box-shadow: none;
-    }
-
-    .instrucoes {
-        font-size: 14px;
-    }
-
-    footer {
-        border-radius: 0;
-    }
-
-    /* Ajustes específicos para entradas de data e hora */
-    .input-container input[type="date"],
-    .input-container input[type="time"] {
-        padding: 12px;
-        font-size: 14px;
     }
 }
