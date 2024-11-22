@@ -58,16 +58,30 @@ $(document).ready(function () {
             if (regiao.barbearias.length > 0) {
                 regiao.barbearias.forEach(barbearia => {
                     const divBarbearia = criarElemento('div', null, 'barbearia');
+            
+                    // Nome da Barbearia
                     divBarbearia.append(criarElemento('h3', barbearia.nome));
-                    divBarbearia.append(criarElemento('p', `Endereço: ${barbearia.endereco}`));
-                    divBarbearia.append(criarElemento('p', `Telefone: ${barbearia.telefone}`));
-                    divBarbearia.append(criarBotaoAgendamento(barbearia));
+                    
+                    // Espaçamento para os dados de endereço e telefone
+                    divBarbearia.append(criarElemento('p', `Endereço: ${barbearia.endereco}`).css('margin-top', '10px'));
+                    divBarbearia.append(criarElemento('p', `Telefone: ${barbearia.telefone}`).css('margin-top', '-12px'));
+            
+                    /* Cortes disponíveis, com quebras de linha
+                    const cortesComQuebraDeLinha = barbearia.cortesAlta ? barbearia.cortesAlta.replace(/\n/g, '<br>') : 'Sem cortes disponíveis';
+                    const cortesElement = criarElemento('p', '', ''); 
+                    cortesElement.html(`Principais cortes: <br><br> ${cortesComQuebraDeLinha}`).css('margin-top', '10px');
+                    divBarbearia.append(cortesElement);*/
+            
+                    // Adiciona botão de agendamento com espaçamento adequado
+                    divBarbearia.append(criarBotaoAgendamento(barbearia).css('margin-top', '15px'));
+                    
                     faixaRegiao.append(divBarbearia);
                 });
                 encontrouBarbearia = true;
             }
-
+            
             dadosBarbearia.append(faixaRegiao);
+            
         });
 
         if (!encontrouBarbearia) {
