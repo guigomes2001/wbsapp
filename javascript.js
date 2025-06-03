@@ -32,51 +32,56 @@ $(document).ready(function () {
 
     // Função para exibir dados da barbearia
     function exibirDadosBarbearia(regioesSelecionadas) {
-        const dadosBarbearia = $('#dadosBarbearia');
-        dadosBarbearia.empty();
+    const dadosBarbearia = $('#dadosBarbearia');
+    dadosBarbearia.empty();
 
-        let encontrouBarbearia = false;
-        let requisicoes = [];
+    let encontrouBarbearia = false;
+    let requisicoes = [];
 
-        regioesSelecionadas.forEach(regiao => {
-            const req = $.ajax({
-                url: `https://wbsbackendprod.onrender.com/barbearias/regiao/${regiao}`,
-                method: 'GET',
-                dataType: 'json'
-            }).done(response => {
-                if (response && response.length > 0) {
-                    const faixaRegiao = criarElemento('div', null, 'faixa-regiao');
-                    const nomeCidade = nomesRegioes[regiao] || `Região ${regiao}`;
-                    faixaRegiao.append(criarElemento('h2', `${nomeCidade} - DF`));
-    
-                    response.forEach(barbearia => {
-                        const divBarbearia = criarElemento('div', null, 'barbearia');
-    
-                        divBarbearia.append(criarElemento('h3', barbearia.nomeBarbearia));
-                        divBarbearia.append(criarElemento('p', `Endereço: ${barbearia.logradouro}`).css('margin-top','10px'));
-                        divBarbearia.append(criarElemento('p', `Telefone: ${barbearia.telefone}`).css('margin-top', '-12px'));
-                        divBarbearia.append(criarBotaoAgendamento(barbearia).css('margin-top', '15px'));
+    regioesSelecionadas.forEach(regiao => {
+        const req = $.ajax({
+            url: `https://wbsbackendprod.onrender.com/barbearias/regiao/${regiao}`,
+            method: 'GET',
+            dataType: 'json'
+        }).done(response => {
+            if (response.message === "Operação realizada com sucesso" && Array.isArray(response.data)) {
+                const faixaRegiao = criarElemento('div', null, 'faixa-regiao');
+                const nomeCidade = nomesRegioes[regiao] || `Região ${regiao}`;
+                faixaRegiao.append(criarElemento('h2', `${nomeCidade} - DF`));
 
-    
-                        faixaRegiao.append(divBarbearia);
-                    });
+                response.data.forEach(barbearia => {
+                    const divBarbearia = criarElemento('div', null, 'barbearia');
 
-                    dadosBarbearia.append(faixaRegiao);
-                    encontrouBarbearia = true;
-                }
-            }).fail(() => {
-                console.error(`Erro ao buscar barbearias da região ${regiao}`);
-            });
+                    divBarbearia.append(criarElemento('h3', barbearia.nomeBarbearia));
+                    divBarbearia.append(criarElemento('p', `Endereço: ${barbearia.logradouro}`).css('margin-top', '10px'));
+                    divBarbearia.append(criarElemento('p', `Telefone: ${barbearia.telefone}`).css('margin-top', '-12px'));
+                    divBarbearia.append(criarBotaoAgendamento(barbearia).css('margin-top', '15px'));
 
-            requisicoes.push(req);
+                    faixaRegiao.append(divBarbearia);
+                });
+
+                dadosBarbearia.append(faixaRegiao);
+                encontrouBarbearia = true;
+            } else {
+                console.warn(response.message || `Erro ao buscar barbearias na região ${regiao}`);
+            }
+        }).fail(() => {
+            console.error(`Erro na requisição para a região ${regiao}`);
         });
 
+        requisicoes.push(req);
+    });
+
+    // Espera todas as requisições finalizarem
+    $.when(...requisicoes).always(() => {
         if (!encontrouBarbearia) {
             const mensagem = criarElemento('p', 'Não há barbearias na sua região', 'mensagem-erro');
             dadosBarbearia.append(mensagem);
         }
         dadosBarbearia.slideDown(300);
-    }
+    });
+}
+
 
     // Manipulador de evento para o botão de pesquisa
     $('#botaoPesquisa').on('click', () => {
