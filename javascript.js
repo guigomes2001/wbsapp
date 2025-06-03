@@ -22,6 +22,14 @@ $(document).ready(function () {
         return botao;
     }
 
+    const nomesRegioes = {
+        1: 'Estrutural',
+        2: 'São Sebastião',
+        3: 'Riacho Fundo',
+        4: 'Sudoeste',
+        5: 'Guará'
+    };
+
     // Função para exibir dados da barbearia
     function exibirDadosBarbearia(regioesSelecionadas) {
         const dadosBarbearia = $('#dadosBarbearia');
@@ -38,16 +46,17 @@ $(document).ready(function () {
             }).done(response => {
                 if (response && response.length > 0) {
                     const faixaRegiao = criarElemento('div', null, 'faixa-regiao');
-                    faixaRegiao.append(criarElemento('h2', `Região ${regiao} - DF`));
-
+                    const nomeCidade = nomesRegioes[regiao] || `Região ${regiao}`;
+                    faixaRegiao.append(criarElemento('h2', `${nomeCidade} - DF`));
+    
                     response.forEach(barbearia => {
                         const divBarbearia = criarElemento('div', null, 'barbearia');
-
+    
                         divBarbearia.append(criarElemento('h3', barbearia.nome));
                         divBarbearia.append(criarElemento('p', `Endereço: ${barbearia.endereco}`).css('margin-top', '10px'));
                         divBarbearia.append(criarElemento('p', `Telefone: ${barbearia.telefone}`).css('margin-top', '-12px'));
                         divBarbearia.append(criarBotaoAgendamento(barbearia).css('margin-top', '15px'));
-
+    
                         faixaRegiao.append(divBarbearia);
                     });
 
