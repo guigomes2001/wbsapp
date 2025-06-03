@@ -15,7 +15,7 @@ $(document).ready(function () {
     function criarBotaoAgendamento(barbearia) {
         const botao = criarElemento('button', 'Agendar Serviço');
         botao.on('click', () => {
-            sessionStorage.setItem('barbeariaNome', encodeURIComponent(barbearia.nome));
+            sessionStorage.setItem('barbeariaNome', encodeURIComponent(barbearia.nomeBarbearia));
             sessionStorage.setItem('barbeariaWhatsapp', encodeURIComponent(barbearia.whatsapp));
             window.location.href = 'agendamento.html';
         });
@@ -52,10 +52,11 @@ $(document).ready(function () {
                     response.forEach(barbearia => {
                         const divBarbearia = criarElemento('div', null, 'barbearia');
     
-                        divBarbearia.append(criarElemento('h3', barbearia.nome));
-                        divBarbearia.append(criarElemento('p', `Endereço: ${barbearia.endereco}`).css('margin-top', '10px'));
+                        divBarbearia.append(criarElemento('h3', barbearia.nomeBarbearia));
+                        divBarbearia.append(criarElemento('p', `Endereço: ${barbearia.logradouro}`).css('margin-top','10px'));
                         divBarbearia.append(criarElemento('p', `Telefone: ${barbearia.telefone}`).css('margin-top', '-12px'));
                         divBarbearia.append(criarBotaoAgendamento(barbearia).css('margin-top', '15px'));
+
     
                         faixaRegiao.append(divBarbearia);
                     });
