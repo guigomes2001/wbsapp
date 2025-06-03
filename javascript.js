@@ -27,68 +27,44 @@ $(document).ready(function () {
         const dadosBarbearia = $('#dadosBarbearia');
         dadosBarbearia.empty();
 
-        const regioes = {
-            '1': { titulo: 'Estrutural - DF', barbearias: [
-                { nome: 'Barbearia 2 Irmão', endereco: 'Av. *********', telefone: '(61) ********', whatsapp: '(61)986532028' },
-                { nome: 'Barbearia Corte Duplo', endereco: 'Rua ********* DF', telefone: '(61) *********', whatsapp: '(61)11111111' }
-            ]},
-            '2': { titulo: 'São Sebastião - DF', barbearias: [
-                { nome: 'Barbearia Novo Visual', endereco: 'Rua ***********, São Sebastião - DF', telefone: '(61)*********', whatsapp: '(61)11111111' },
-                { nome: 'Salão 8 Pontos', endereco: 'Av *********** Brasília - DF', telefone: '(61)*********', whatsapp: '(61)11111111' }
-            ]},
-            '3': { titulo: 'Riacho Fundo - DF', barbearias: [
-                { nome: 'Barbearia Navalha Afiada', endereco: 'Quadra *********** - DF', telefone: '(61)*********', whatsapp: '(61)11111111' },
-                { nome: 'Salão Pente e Régua', endereco: 'Av. *********', telefone: '(61)*********', whatsapp: '(61)11111111' }
-            ]}
-        };
-
         let encontrouBarbearia = false;
+        let requisicoes = [];
 
-        regioesSelecionadas.forEach(regiaoSelecionada => {
-            if (!regioes[regiaoSelecionada]) {
-                console.error('Região não encontrada:', regiaoSelecionada);
-                return;
-            }
+        regioesSelecionadas.forEach(regiao => {
+            const req = $.ajax({
+                url: `https://wbsbackendprod.onrender.com/barbearias/regiao/${regiao}`,
+                method: 'GET',
+                dataType: 'json'
+            }).done(response => {
+                if (response && response.length > 0) {
+                    const faixaRegiao = criarElemento('div', null, 'faixa-regiao');
+                    faixaRegiao.append(criarElemento('h2', `Região ${regiao} - DF`));
 
-            const regiao = regioes[regiaoSelecionada];
-            const faixaRegiao = criarElemento('div', null, 'faixa-regiao');
+                    response.forEach(barbearia => {
+                        const divBarbearia = criarElemento('div', null, 'barbearia');
 
-            faixaRegiao.append(criarElemento('h2', regiao.titulo));
+                        divBarbearia.append(criarElemento('h3', barbearia.nome));
+                        divBarbearia.append(criarElemento('p', `Endereço: ${barbearia.endereco}`).css('margin-top', '10px'));
+                        divBarbearia.append(criarElemento('p', `Telefone: ${barbearia.telefone}`).css('margin-top', '-12px'));
+                        divBarbearia.append(criarBotaoAgendamento(barbearia).css('margin-top', '15px'));
 
-            if (regiao.barbearias.length > 0) {
-                regiao.barbearias.forEach(barbearia => {
-                    const divBarbearia = criarElemento('div', null, 'barbearia');
-            
-                    // Nome da Barbearia
-                    divBarbearia.append(criarElemento('h3', barbearia.nome));
-                    
-                    // Espaçamento para os dados de endereço e telefone
-                    divBarbearia.append(criarElemento('p', `Endereço: ${barbearia.endereco}`).css('margin-top', '10px'));
-                    divBarbearia.append(criarElemento('p', `Telefone: ${barbearia.telefone}`).css('margin-top', '-12px'));
-            
-                    /* Cortes disponíveis, com quebras de linha
-                    const cortesComQuebraDeLinha = barbearia.cortesAlta ? barbearia.cortesAlta.replace(/\n/g, '<br>') : 'Sem cortes disponíveis';
-                    const cortesElement = criarElemento('p', '', ''); 
-                    cortesElement.html(`Principais cortes: <br><br> ${cortesComQuebraDeLinha}`).css('margin-top', '10px');
-                    divBarbearia.append(cortesElement);*/
-            
-                    // Adiciona botão de agendamento com espaçamento adequado
-                    divBarbearia.append(criarBotaoAgendamento(barbearia).css('margin-top', '15px'));
-                    
-                    faixaRegiao.append(divBarbearia);
-                });
-                encontrouBarbearia = true;
-            }
-            
-            dadosBarbearia.append(faixaRegiao);
-            
+                        faixaRegiao.append(divBarbearia);
+                    });
+
+                    dadosBarbearia.append(faixaRegiao);
+                    encontrouBarbearia = true;
+                }
+            }).fail(() => {
+                console.error(`Erro ao buscar barbearias da região ${regiao}`);
+            });
+
+            requisicoes.push(req);
         });
 
         if (!encontrouBarbearia) {
             const mensagem = criarElemento('p', 'Não há barbearias na sua região', 'mensagem-erro');
             dadosBarbearia.append(mensagem);
         }
-
         dadosBarbearia.slideDown(300);
     }
 
