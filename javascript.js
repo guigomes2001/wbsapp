@@ -92,9 +92,19 @@ $(document).ready(function () {
         if (regioesSelecionadas.length > 0) {
             exibirDadosBarbearia(regioesSelecionadas);
         } else {
-            alert('Por favor, selecione pelo menos uma região.');
+            alertaSelecionarAoMenosUmaRegiao();
         }
     });
+
+    function alertaSelecionarAoMenosUmaRegiao() {
+         Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "Por favor, selecione pelo menos uma região!",
+            confirmButtonText: "Entendi 💪"
+ //         footer: '<a href="#">Why do I have this issue?</a>'
+            });
+    }
 
     // Manipulador de evento para o botão de faturamento
     $('#botaoFaturamento').on('click', function () {
