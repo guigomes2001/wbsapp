@@ -101,7 +101,8 @@ $(document).ready(function () {
             icon: "error",
             title: "Oops...",
             text: "Por favor, selecione pelo menos uma região!",
-            confirmButtonText: "Entendi 💪"
+            confirmButtonText: "Entendi 💪", 
+            confirmButtonColor: "#007bff"
  //         footer: '<a href="#">Why do I have this issue?</a>'
             });
     }
