@@ -1,5 +1,4 @@
 $(document).ready(function () {
-    // Função para criar elementos
     function criarElemento(tipo, texto, classe) {
         const elemento = $('<' + tipo + '></' + tipo + '>');
         if (texto) {
@@ -11,7 +10,6 @@ $(document).ready(function () {
         return elemento;
     }
 
-    // Função para criar botão de agendamento
     function criarBotaoAgendamento(barbearia) {
         const botao = criarElemento('button', 'Agendar Serviço');
         botao.on('click', () => {
@@ -30,7 +28,6 @@ $(document).ready(function () {
         5: 'Guará'
     };
 
-    // Função para exibir dados da barbearia
     function exibirDadosBarbearia(regioesSelecionadas) {
     const dadosBarbearia = $('#dadosBarbearia');
     dadosBarbearia.empty();
@@ -72,7 +69,6 @@ $(document).ready(function () {
         requisicoes.push(req);
     });
 
-    // Espera todas as requisições finalizarem
     $.when(...requisicoes).always(() => {
         if (!encontrouBarbearia) {
             const mensagem = criarElemento('p', 'Não há barbearias na sua região', 'mensagem-erro');
@@ -82,8 +78,6 @@ $(document).ready(function () {
     });
 }
 
-
-    // Manipulador de evento para o botão de pesquisa
     $('#botaoPesquisa').on('click', () => {
         const regioesSelecionadas = $('input[name="regiao"]:checked').map(function() {
             return $(this).val();
@@ -107,38 +101,34 @@ $(document).ready(function () {
             });
     }
 
-    // Manipulador de evento para o botão de faturamento
     $('#botaoFaturamento').on('click', function () {
         $('#loginModal').show();
     });
 
-    // Manipulador de evento para o botão de fechar o modal
     $('.close').on('click', function () {
         $('#loginModal').hide();
     });
 
-    // Manipulador de envio do formulário de login
     $('#loginForm').on('submit', function (event) {
         event.preventDefault();
         const username = $('#username').val();
         const password = $('#password').val();
 
-        // Enviar dados de login para o servidor
         $.ajax({
-            url: '/wbs/api/verificarLogin', // Certifique-se de que o caminho está correto
+            url: '/wbs/api/verificarLogin',
             type: 'POST',
             contentType: 'application/json',
             data: JSON.stringify({ username, password }),
             success: function (response) {
                 if (response.success) {
-                    window.location.href = 'faturamento.html'; // Redireciona após sucesso
+                    window.location.href = 'faturamento.html';
                 } else {
-                    alert('Usuário ou senha inválidos.'); // Mensagem de erro se a autenticação falhar
+                    alert('Usuário ou senha inválidos.');
                 }
             },
             error: function (jqXHR, textStatus, errorThrown) {
-                console.error('Erro na autenticação:', textStatus, errorThrown); // Log de erro para ajudar na depuração
-                alert('Erro na autenticação.'); // Mensagem genérica de erro
+                console.error('Erro na autenticação:', textStatus, errorThrown); 
+                alert('Erro na autenticação.'); 
             }
         });
     });

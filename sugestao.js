@@ -1,24 +1,20 @@
 document.addEventListener("DOMContentLoaded", function () {
     const form = document.getElementById("formSugestao");
 
-    // Inicializar o EmailJS
-    emailjs.init("HJ5qyClRJVX-vwYf0"); // Substitua por seu USER_ID do EmailJS
+    emailjs.init("HJ5qyClRJVX-vwYf0"); 
 
     form.addEventListener("submit", function (event) {
-        event.preventDefault(); // Evita o envio padrão do formulário
+        event.preventDefault(); 
 
-         // Exibe o loading e desabilita o botão
     const botao = document.getElementById("botaoSugestao");
     botao.disabled = true;
     botao.textContent = "Aguarde...";
 
-    // Simula o tempo de bloqueio (ex: 10 segundos)
     setTimeout(() => {
         botao.disabled = false;
         botao.textContent = "Enviar sugestão";
-    }, 300000); // 5 minutos
+    }, 300000); 
 
-        // Obter valores dos campos
         const nome = document.getElementById("nome").value;
         const nomeBarbearia = document.getElementById("nomeBarbearia").value;
         const endereco = document.getElementById("endereco").value;
@@ -27,7 +23,6 @@ document.addEventListener("DOMContentLoaded", function () {
         const observacoes = document.getElementById("observacoes").value;
         const regiao = document.getElementById("regiao").value;
 
-        // Configurar parâmetros para o EmailJS
         const params = {
             nome: nome,
             nomeBarbearia: nomeBarbearia,
@@ -40,11 +35,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
         console.log(params);
 
-        // Enviar e-mail via EmailJS
         emailjs.send("service_5btsf5e", "template_lmpapki", params)
             .then(function (response) {
-                alert("Sugestão enviada com sucesso! Obrigado por contribuir.");
-                form.reset(); // Limpa o formulário
+                alertaSugestaoEnviadaComSucesso();
+                form.reset(); 
             })
             .catch(function (error) {
                 alert("Ocorreu um erro ao enviar sua sugestão. Tente novamente.");
@@ -52,16 +46,13 @@ document.addEventListener("DOMContentLoaded", function () {
             }) 
 
             .finally(function () {
-                // Oculta o loading após o envio
                 loadingElement.style.display = "none";
             });
             
-        // Limpa mensagens de erro
         document.querySelectorAll('.error-message').forEach(function(element) {
             element.textContent = '';
         });
 
-        // Validação dos campos
         let valido = true;
 
         if (nome.trim() === '') {
@@ -90,9 +81,19 @@ document.addEventListener("DOMContentLoaded", function () {
         }
 
         if (!valido) {
-            return; // Se algum campo for inválido, não envia o formulário
+            return; 
         }
     });
+
+    function alertaSugestaoEnviadaComSucesso() {
+        Swal.fire({
+            icon: "success",
+            title: "Sugestão enviada!",
+            text: "Obrigado por contribuir com a nossa comunidade.",
+            confirmButtonText: "Fechar",
+            confirmButtonColor: "#007bff"
+        });
+    }
 
     // Atualiza a data e hora em tempo real no rodapé
     function atualizarDataHora() {

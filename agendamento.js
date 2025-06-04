@@ -9,16 +9,12 @@ function atualizarDataHora() {
 setInterval(atualizarDataHora, 1000);
 atualizarDataHora();
 
-// Manipulador de envio do formulário
 document.getElementById('formAgendamento').addEventListener('submit', function(event) {
-    event.preventDefault(); // Evita o envio do formulário
-
-    // Limpar mensagens de erro
+    event.preventDefault(); 
     document.querySelectorAll('.error-message').forEach(function(element) {
         element.textContent = '';
     });
 
-    // Obter valores dos campos
     const nome = document.getElementById('nome').value;
     const telefone = document.getElementById('telefone').value;
     const data = document.getElementById('data').value;
@@ -29,7 +25,6 @@ document.getElementById('formAgendamento').addEventListener('submit', function(e
 
     let valido = true;
 
-    // Validação dos campos
     if (nome.trim() === '') {
         document.getElementById('errorNome').textContent = 'Por favor, insira seu nome.';
         valido = false;
@@ -57,7 +52,7 @@ document.getElementById('formAgendamento').addEventListener('submit', function(e
                 window.open(whatsappUrl, '_blank');
 
                 alert('Agendamento enviado com sucesso! Você será redirecionado para o WhatsApp do local.');
-                document.getElementById('formAgendamento').reset(); // Limpa o formulário
+                document.getElementById('formAgendamento').reset(); 
             } else {
                 alert('Ocorreu um erro ao enviar o agendamento. Tente novamente');
             }
