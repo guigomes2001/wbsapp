@@ -1,15 +1,16 @@
-// Atualiza a data e hora no rodapé
+// Atualiza a data e hora em tempo real no rodapé
 function atualizarDataHora() {
-    const dataHora = new Date();
-    const dataHoraString = dataHora.toLocaleString();
+    var dataHora = new Date();
+    var dataHoraString = dataHora.toLocaleString();
     document.getElementById('data-hora').textContent = dataHoraString;
 }
+
+// Atualiza a data e hora a cada segundo
 setInterval(atualizarDataHora, 1000);
 atualizarDataHora();
 
-document.getElementById('formAgendamento').addEventListener('submit', async function(event) {
+document.getElementById('formAgendamento').addEventListener('submit', function(event) {
     event.preventDefault(); 
-
     document.querySelectorAll('.error-message').forEach(function(element) {
         element.textContent = '';
     });
@@ -24,70 +25,39 @@ document.getElementById('formAgendamento').addEventListener('submit', async func
 
     let valido = true;
 
-    if (!nome || nome.trim() === '') {
+    if (nome === null || nome.trim() === '') {
         document.getElementById('errorNome').textContent = 'Por favor, insira seu nome.';
         valido = false;
     }
 
-    if (!telefone || !/^\d{10,15}$/.test(telefone)) {
+    if (telefone === null || telefone.trim() === '' || !/^\d{10,15}$/.test(telefone)) {
         document.getElementById('errorTelefone').textContent = 'Por favor, insira um telefone válido.';
         valido = false;
     }
 
-    if (!data || isNaN(new Date(data).getTime())) {
+    if (!data) {
         document.getElementById('errorData').textContent = 'Por favor, escolha uma data.';
         valido = false;
     }
 
-    if (!hora || hora.trim() === '') {
+    if (!hora) {
         document.getElementById('errorHora').textContent = 'Por favor, escolha uma hora.';
         valido = false;
     }
 
-    const aceitou = await alertaTermoECondicoes();
-
-    if (!aceitou) {
-        document.getElementById('errorTermos').textContent = 'Você precisa aceitar os termos antes de agendar.';
-        return;
-    } else {
-        document.getElementById('errorTermos').textContent = '';
-    }
-
     if (valido) {
-        const mensagem = `Olá, meu nome é ${nome}. Gostaria de agendar um serviço na ${barbeariaNome} para o dia ${data} às ${hora}. Meu WhatsApp/Telefone é ${telefone}. Observações: ${observacoes}`;
-        const whatsappUrl = `https://wa.me/${barbeariaWhatsapp}?text=${encodeURIComponent(mensagem)}`;
+        
+                const mensagem = `Olá, meu nome é ${nome}. Gostaria de agendar um serviço na ${barbeariaNome} para o dia ${data} às ${hora}. Meu WhatsApp/Telefone é ${telefone}. Observações: ${observacoes}`;
+                const whatsappUrl = `https://wa.me/${barbeariaWhatsapp}?text=${encodeURIComponent(mensagem)}`;
+                window.open(whatsappUrl, '_blank');
 
-        window.open(whatsappUrl, '_blank');
-
-        alert('Agendamento enviado com sucesso! Você será redirecionado para o WhatsApp do local.');
-        document.getElementById('formAgendamento').reset(); 
-    } else {
-        alert('Ocorreu um erro ao enviar o agendamento. Corrija os erros do formulário.');
-    }
-});
-
-async function alertaTermoECondicoes() {
-    const { value: accept } = await Swal.fire({
-        title: "Termos e Condições",
-        input: "checkbox",
-        inputValue: 1,
-        confirmButtonColor: "#007bff",
-        confirmButtonAriaLabel: "Aceitar",
-        inputPlaceholder: `
-            Eu concordo com os termos e condições de uso do site.
-        `,
-        confirmButtonText: `
-            Continue&nbsp;<i class="fa fa-arrow-right"></i>
-        `,
-        inputValidator: (result) => {
-            return !result && "Você deve aceitar os termos e condições para continuar!";
-        }
-    });
-
-    if (accept) {
-        await Swal.fire("Você concordou com os T&C :)");
-        return true;
-    }
-
-    return false;
-}
+                alert('Agendamento enviado com sucesso! Você será redirecionado para o WhatsApp do local.');
+                document.getElementById('formAgendamento').reset(); 
+            } else {
+                alert('Ocorreu um erro ao enviar o agendamento. Tente novamente');
+            }
+        })
+        .catch(error => {
+            console.error('Erro:', error);
+            alert('Ocorreu um erro ao enviar o agendamento. Tente novamente');
+        });
