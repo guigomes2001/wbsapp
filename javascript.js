@@ -29,6 +29,7 @@ $(document).ready(function () {
     };
 
     function exibirDadosBarbearia(regioesSelecionadas) {
+    $('#botaoPesquisa').prop('disabled', true);
     const dadosBarbearia = $('#dadosBarbearia');
     dadosBarbearia.empty();
 
@@ -41,7 +42,7 @@ $(document).ready(function () {
             method: 'GET',
             dataType: 'json'
         }).done(response => {
-            if (response.message === "Operação realizada com sucesso" && Array.isArray(response.data)) {
+            if (response.message === "Operação realizada com sucesso" && Array.isArray(response.data) && response.data.length > 0) {
                 const faixaRegiao = criarElemento('div', null, 'faixa-regiao');
                 const nomeCidade = nomesRegioes[regiao] || `Região ${regiao}`;
                 faixaRegiao.append(criarElemento('h2', `${nomeCidade} - DF`));
@@ -70,11 +71,13 @@ $(document).ready(function () {
     });
 
     $.when(...requisicoes).always(() => {
+      
         if (!encontrouBarbearia) {
             const mensagem = criarElemento('p', 'Não há barbearias na sua região', 'mensagem-erro');
             dadosBarbearia.append(mensagem);
         }
         dadosBarbearia.slideDown(300);
+        $('#botaoPesquisa').prop('disabled', false);
     });
 }
 
